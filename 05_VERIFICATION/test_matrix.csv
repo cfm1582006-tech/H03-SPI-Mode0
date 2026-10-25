@@ -1,0 +1,12 @@
+tc_id,source,description,planned_gate,evidence_policy
+TC-001,Charter_6,"TX 00 FF A5 with independent known RX",rtl_regression,new run cases CSV
+TC-002,Charter_6,"CS encloses exactly eight rising and falling SCLK edges",pin_checker,new run VCD and simulation log
+TC-003,Additional,"H=1 and non-power-of-two H=3/5; both bit orders",parameter_sweep,new run results JSON
+TC-004,Additional,"START while busy and held START; TX changes after acceptance",handshake_checker,new run cases CSV
+TC-005,Additional,"Reset abort at high/low phases and recovery frame",reset_checker,new run cases CSV
+TC-006,Additional,"Exhaustive byte patterns and seeded random payloads",data_regression,new run cases CSV
+TC-007,Additional,"Invalid HALF_CYCLES rejected and invalid FSM state recovers",negative_and_fault_test,new run logs
+TC-008,Additional,"Mutation checker detects TX RX and frame-length bugs",mutation_test,new run results JSON
+TC-009,Additional,"Tiny Tapeout pin map OE and ENA behavior",wrapper_test,new run logs
+TC-010,Charter_7_8,"Synthesis STA DRC LVS antenna GDS",physical_flow,exact new run artifacts
+

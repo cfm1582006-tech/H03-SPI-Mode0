@@ -1,0 +1,35 @@
+name: SPI RTL to GDSII
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-flow:
+    # Register a trusted Linux EDA runner and set the repository PDK_ROOT variable.
+    # LIBRELANE_APPIMAGE provides the tested EDA environment for the command.
+    runs-on: [self-hosted, linux, x64, eda]
+    timeout-minutes: 60
+    env:
+      PDK_ROOT: ${{ vars.PDK_ROOT }}
+      LIBRELANE_APPIMAGE: ${{ vars.LIBRELANE_APPIMAGE }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Run complete verified flow
+        run: |
+          test -x "$LIBRELANE_APPIMAGE"
+          test -d "$PDK_ROOT/sky130A"
+          "$LIBRELANE_APPIMAGE" python3 scripts/run_full_flow.py --pdk-root "$PDK_ROOT" \
+            --tag "ci_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}" --jobs 4 --tops both \
+            --out "evidence/ci_full_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+      - name: Save physical and proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spi-physical-${{ github.sha }}
+          path: |
+            evidence/ci_full_*
+            flow/runs/ci_*
+          if-no-files-found: warn
+          retention-days: 14

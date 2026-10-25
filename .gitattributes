@@ -1,0 +1,9 @@
+*.sv text eol=lf
+*.v text eol=lf
+*.py text eol=lf
+*.sdc text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.gds binary
+*.png binary

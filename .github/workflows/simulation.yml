@@ -1,0 +1,38 @@
+name: SPI functional verification
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install simulator and linter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog verilator
+      - name: Lint synthesizable wrapper and core
+        run: >-
+          verilator --lint-only --Wall --top-module tt_um_h03_spi_mode0
+          04_IMPLEMENTATION/rtl/h03_spi_master.sv
+          04_IMPLEMENTATION/rtl/tt_um_h03_spi_mode0.sv
+      - name: Check event oracle
+        run: python3 05_VERIFICATION/golden_model/reference_model.py --self-check
+      - name: Verify core and mutation detection
+        run: python3 scripts/run_regression.py --out evidence/ci_core --mutations
+      - name: Verify Tiny Tapeout pin mapping
+        run: python3 scripts/run_wrapper_test.py --out evidence/ci_wrapper
+      - name: Save evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spi-verification-${{ github.sha }}
+          path: evidence/ci_*
+          if-no-files-found: warn
+          retention-days: 14

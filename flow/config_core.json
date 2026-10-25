@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "version": 2,
+    "flow": "Classic"
+  },
+  "DESIGN_NAME": "h03_spi_master",
+  "VERILOG_FILES": [
+    "dir::../04_IMPLEMENTATION/rtl/h03_spi_master.sv"
+  ],
+  "SYNTH_PARAMETERS": [
+    "HALF_CYCLES=4",
+    "MSB_FIRST=1"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10.0,
+  "PNR_SDC_FILE": "dir::core.sdc",
+  "SIGNOFF_SDC_FILE": "dir::core.sdc",
+  "PDK": "sky130A",
+  "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+  "FP_SIZING": "relative",
+  "FP_CORE_UTIL": 40,
+  "PL_TARGET_DENSITY_PCT": 45,
+  "RUN_CTS": true,
+  "RUN_LINTER": true,
+  "ERROR_ON_LINTER_WARNINGS": true,
+  "RUN_MAGIC_DRC": true,
+  "RUN_KLAYOUT_DRC": true,
+  "RUN_LVS": true,
+  "RUN_KLAYOUT_XOR": true,
+  "RUN_MCSTA": true,
+  "PNR_CORNERS": [
+    "nom_tt_025C_1v80",
+    "min_ff_n40C_1v95",
+    "max_ss_100C_1v60"
+  ],
+  "RSZ_CORNERS": [
+    "nom_tt_025C_1v80",
+    "min_ff_n40C_1v95",
+    "max_ss_100C_1v60"
+  ],
+  "RUN_POST_GRT_DESIGN_REPAIR": true,
+  "RUN_POST_GRT_RESIZER_TIMING": true,
+  "RUN_EQY": false,
+  "TIMING_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "HOLD_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "SETUP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_SLEW_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_CAP_VIOLATION_CORNERS": [
+    "*"
+  ],
+  "MAX_TRANSITION_CONSTRAINT": 0.75,
+  "CLOCK_UNCERTAINTY_CONSTRAINT": 0.25,
+  "CLOCK_TRANSITION_CONSTRAINT": 0.15,
+  "OUTPUT_CAP_LOAD": 33.442,
+  "MAX_FANOUT_CONSTRAINT": 8
+}

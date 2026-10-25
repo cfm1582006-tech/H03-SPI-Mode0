@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.vvp
+flow/runs/
+evidence/
+verification/evidence_check/
+verification/wrapper_evidence_check/
